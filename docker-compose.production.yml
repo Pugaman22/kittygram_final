@@ -2,8 +2,8 @@ version: '3'
 
 volumes:
   kitty-docker_pg_data_production:
-  static:
-  media:
+  kitty_static:
+  kitty_media:
 
 services:
   db:
@@ -12,24 +12,24 @@ services:
     volumes:
       - kitty-docker_pg_data_production:/var/lib/postgresql/data
   backend:
-    build: ./backend/
+    image: pugaman22/kitty_backend
     env_file: .env
     volumes:
-      - static:/backend_static
-      - media:/media
+      - kitty_static:/backend_static
+      - kitty_media:/media
     depends_on:
       - db
   frontend:
     env_file: .env
-    build: ./frontend/
+    image: pugaman22/kitty_frontend
     command: cp -r /app/build/. /frontend_static/
     volumes:
-      - static:/frontend_static
+      - kitty_static:/frontend_static
   gateway:
-    build: ./nginx/
+    image: pugaman22/kitty_gateway
     env_file: .env
     ports:
       - 9000:80
     volumes:
-      - static:/staticfiles/
-      - media:/media
+      - kitty_static:/staticfiles/
+      - kitty_media:/media
