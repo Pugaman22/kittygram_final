@@ -16,7 +16,7 @@ services:
     env_file: .env
     volumes:
       - static:/backend_static
-      - media:/media
+      - media:/app/media/
     depends_on:
       - db
   frontend:
@@ -27,9 +27,10 @@ services:
       - static:/frontend_static
   gateway:
     build: ./nginx/
+    # image: pugaman22/kitty_gateway
     env_file: .env
     ports:
       - 9000:80
     volumes:
       - static:/staticfiles/
-      - media:/media
+      - media:/app/media/
