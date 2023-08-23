@@ -12,7 +12,7 @@ services:
     volumes:
       - kitty-docker_pg_data_production:/var/lib/postgresql/data
   backend:
-    image: pugaman22/kitty_backend
+    image: pugaman22/kittygram_backend
     env_file: .env
     volumes:
       - kitty_static:/backend_static
@@ -21,12 +21,12 @@ services:
       - db
   frontend:
     env_file: .env
-    image: pugaman22/kitty_frontend
+    image: pugaman22/kittygram_frontend
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - kitty_static:/frontend_static
   gateway:
-    image: pugaman22/kitty_gateway
+    image: pugaman22/kittygram_gateway
     env_file: .env
     ports:
       - 9000:80
