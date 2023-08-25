@@ -13,7 +13,7 @@ services:
     env_file: .env
     volumes:
       - kitty-docker_pg_data_production:/var/lib/postgresql/data
-  
+
   backend:
 
     image: pugaman22/kittygram_backend
